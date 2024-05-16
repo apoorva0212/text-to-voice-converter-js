@@ -1,27 +1,23 @@
-const passwordBox = document.getElementById("password");
-const length = 12;
+let speech = new SpeechSynthesisUtterance();
 
-const upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-const lowerCase = "abcdefghijklmnopqrstuvwxyz";
-const number = "0123456789";
-const symbol = "@#$%^&*()_+~|}{[]></-=";
+let voices = [];
 
-const allChars = upperCase + lowerCase + number + symbol;
-function createPassword() {
-  let password = "";
-  password += upperCase[Math.floor(Math.random() * upperCase.length)];
-  password += lowerCase[Math.floor(Math.random() * lowerCase.length)];
-  password += number[Math.floor(Math.random() * number.length)];
-  password += symbol[Math.floor(Math.random() * symbol.length)];
+let voiceSelected = document.querySelector("select");
 
-  while (length > password.length) {
-    password += allChars[Math.floor(Math.random() * allChars.length)];
-  }
+window.speechSynthesis.onvoiceschanged = () => {
+  voices = window.speechSynthesis.getVoices();
+  speech.voice = voices[0];
 
-  passwordBox.value = password;
-}
+  voices.forEach(
+    (voice, i) => (voiceSelected.options[i] = new Option(voice.name, i))
+  );
+};
 
-function copyPassword() {
-  passwordBox.select();
-  document.execCommand("copy", true);
-}
+voiceSelected.addEventListener("change", () => {
+  speech.voice = voices[voiceSelected.value];
+});
+
+document.querySelector("button").addEventListener("click", () => {
+  speech.text = document.querySelector("textarea").value;
+  window.speechSynthesis.speak(speech);
+});
