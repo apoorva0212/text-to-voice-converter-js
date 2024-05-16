@@ -2,27 +2,18 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width; initial-scale=1" />
-    <title>Random Password Generator</title>
-    <style>
-      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap");
-    </style>
+    <title>Text To Speech Converter</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="container">
-      <h1>
-        Generate a <br />
-        <span>Random Password</span>
-      </h1>
-      <div class="display">
-        <input type="text" id="password" placeholder="Password" />
-        <img src="assets/copy.png" onclick="copyPassword()" />
+    <div class="hero">
+      <h1>Text To Speech <span>Converter</span></h1>
+      <textarea placeholder="Write anything here.."></textarea>
+      <div class="row">
+        <select></select>
+        <button><img src="assets/play.png" />Listen</button>
       </div>
-      <button onclick="createPassword()">
-        <img src="assets/generate.png" />
-        Generate Password
-      </button>
     </div>
+    <script src="script.js"></script>
   </body>
-  <script src="script.js"></script>
 </html>
